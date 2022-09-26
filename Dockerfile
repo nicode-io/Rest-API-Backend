@@ -40,7 +40,7 @@ RUN python -m venv /py && \
 
 
 # Define path to environment variables
-ENV PATH="py/bin:$PATH"
+ENV PATH="/py/bin:$PATH"
 
 # Specify user to switch to
 USER django-user
