@@ -1,0 +1,20 @@
+# Version of Docker compose syntax
+version: "3.9"
+
+# Main block, one or more services can be used
+services:
+  app:
+    build:
+      # Root will be used as ctx
+      context: .
+      args:
+        - DEV=true
+    # Map ports from local machine with Docker container
+    ports:
+      - "8000:8000"
+    # Map locale machine directory with Docker container directory
+    # Reflect changes in container in local machine directory without re-run container
+    volumes:
+      - ./app:/app
+    command: >
+      sh -c "python manage.py runserver 0.0.0.0:8000"
