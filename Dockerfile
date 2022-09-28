@@ -22,6 +22,10 @@ ARG DEV=false
 RUN python -m venv /py && \
     # Install or update PIP
     /py/bin/pip install --upgrade pip && \
+    # Install database connector dependencies
+    apk add --update --no-cache postgresql-client && \
+    apk add --update --no-cache --virtual .tmp-build-deps \
+      build-base postgresql-dev musl-dev && \
     # Install requirements file to our project using pip
     /py/bin/pip install -r /tmp/requirements.txt && \
     # Install linting tool only in development mode
@@ -31,7 +35,9 @@ RUN python -m venv /py && \
     fi && \
     # Remove tmp folder
     rm -rf /tmp && \
-    # Add user inside our linux image  \
+    # Clean up build dependencies
+    apk del .tmp-build-deps && \
+    # Add user inside our linux image
     # NEVER USE ROOT USER IN DOCKER CONTAINER
     adduser \
         --disabled-password \
