@@ -69,7 +69,19 @@ python manage.py migrate
 * (Add migrations commands to Docker compose)
 * (Update GitHub actions)
 
+# Django Admin
+* UI to update data through models
+* Enabled per model
+* Inside **admin.py**
+  * **admin.site.register** 
+* Customisable
+  * Create class based off **ModelAdmin** or **UserAdmin**
+  * Override/set class variables
+  * Create **fieldsets**, **readonly_fields**, **add_fieldsets**, etc. to control layout of admin page
+  
+
 
 ## Tips
 * When using **@patch(...)** for mocking behaviours, the argument to be used in the function/class which is targeted by patch work from left to right, starting from the nearest bottom patch to the upper patch on the right.
 * Create a new user model on every Django project to make it easier to customise later or, for example, using email instead of username 
+* It's good practice to use **from django.utils.translation import gettext_lazy as _** to prepare translation for future needs in project 
